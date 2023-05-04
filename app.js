@@ -6,7 +6,9 @@ const cancelNewBookBtn = document.querySelector("#cancel-book-btn");
 const author = document.querySelector("#author");
 const title = document.querySelector("#title");
 const pageCount = document.querySelector("#page-count");
-const readStatusChoices = document.querySelectorAll("input[name='read-status']");
+const readStatusChoices = document.querySelectorAll(
+  "input[name='read-status']"
+);
 
 let myLibrary = [];
 
@@ -41,7 +43,8 @@ addBtn.addEventListener("click", showModal);
 // When the user clicks anywhere outside of the modal form, close it
 window.onclick = function (event) {
   if (event.target === modal) {
-    modal.style.display = "none";
+		resetForm();
+		modal.style.display = "none";
   }
 };
 
@@ -91,25 +94,28 @@ function updateLibrary() {
     readButton.setAttribute("data-idx", bookIdx.toString());
     readButton.addEventListener("click", toggleReadStatus);
     readButton.classList.add("btn");
-		readButton.setAttribute("data-idx", bookIdx.toString());
+    readButton.setAttribute("data-idx", bookIdx.toString());
 
-		const delButton = document.createElement("button");
-		const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-		const iconPath = document.createElementNS(
-			'http://www.w3.org/2000/svg',
-			'path'
-		);
-		iconSvg.setAttribute('fill', '#3e4a61');
-		iconSvg.setAttribute('viewBox', '0 0 24 24');
-		iconPath.setAttribute(
-			'd',
-			'M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8.46,11.88L9.87,10.47L12,12.59L14.12,10.47L15.53,11.88L13.41,14L15.53,16.12L14.12,17.53L12,15.41L9.88,17.53L8.47,16.12L10.59,14L8.46,11.88M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z'
-		);
-		iconSvg.appendChild(iconPath);
-		delButton.appendChild(iconSvg);
-		delButton.classList.add("del-btn");
-		delButton.setAttribute("data-idx", bookIdx.toString());
-		delButton.addEventListener("click", deleteBook);
+    const delButton = document.createElement("button");
+    const iconSvg = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    const iconPath = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    iconSvg.setAttribute("fill", "#3e4a61");
+    iconSvg.setAttribute("viewBox", "0 0 24 24");
+    iconPath.setAttribute(
+      "d",
+      "M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8.46,11.88L9.87,10.47L12,12.59L14.12,10.47L15.53,11.88L13.41,14L15.53,16.12L14.12,17.53L12,15.41L9.88,17.53L8.47,16.12L10.59,14L8.46,11.88M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+    );
+    iconSvg.appendChild(iconPath);
+    delButton.appendChild(iconSvg);
+    delButton.classList.add("del-btn");
+    delButton.setAttribute("data-idx", bookIdx.toString());
+    delButton.addEventListener("click", deleteBook);
 
     // Check book read status
     if (book.read === true) {
@@ -127,8 +133,8 @@ function updateLibrary() {
     newDiv.appendChild(pageCountParagraph);
     newDiv.appendChild(document.createElement("hr"));
     newDiv.appendChild(readButton);
-		newDiv.appendChild(document.createElement("hr"));
-		newDiv.appendChild(delButton);
+    newDiv.appendChild(document.createElement("hr"));
+    newDiv.appendChild(delButton);
 
     gridLibrary.appendChild(newDiv);
   }
@@ -147,7 +153,6 @@ function getReadStatusChoice(radionButtons) {
 }
 
 function validateForm() {
-
   const authorValue = author.value;
   const titleValue = title.value;
   const pageCountValue = pageCount.value;
@@ -155,26 +160,28 @@ function validateForm() {
 
   if (authorValue === "") {
     author.setCustomValidity("Please enter an author name.");
-		author.reportValidity();
+    author.reportValidity();
     return false;
   }
 
   if (titleValue === "") {
     title.setCustomValidity("Please enter a title.");
-		title.reportValidity();
+    title.reportValidity();
     return false;
   }
 
   if (pageCountValue === "" || !parseInt(pageCountValue)) {
     pageCount.setCustomValidity("Please enter a correct page count.");
-		pageCount.reportValidity();
+    pageCount.reportValidity();
     return false;
   }
 
   if (!readStatusValue) {
-    [...readStatusChoices][1].setCustomValidity("Please check one of the options.");
-		[...readStatusChoices][1].reportValidity();
-    return false;		
+    [...readStatusChoices][1].setCustomValidity(
+      "Please check one of the options."
+    );
+    [...readStatusChoices][1].reportValidity();
+    return false;
   }
 
   author.setCustomValidity("");
@@ -190,30 +197,46 @@ function submitNewBook(event) {
   const isValid = validateForm();
 
   if (!isValid) {
-		return;
+    return;
   }
 
-	const authorValue = author.value;
+  const authorValue = author.value;
   const titleValue = title.value;
   const pageCountValue = pageCount.value;
   const readStatusValue = Boolean(getReadStatusChoice(readStatusChoices));
-  const newBook = new Book(authorValue, titleValue, pageCountValue, readStatusValue);
+  const newBook = new Book(
+    authorValue,
+    titleValue,
+    pageCountValue,
+    readStatusValue
+  );
   myLibrary.push(newBook);
   updateLibrary();
+  resetForm();
 
   modal.style.display = "none";
 }
 submitNewBookBtn.addEventListener("click", submitNewBook);
 
+function resetForm() {
+	author.value = "";
+	title.value = "";
+	pageCount.value = "";
+	for (const radioBtn of [...readStatusChoices]) {
+		radioBtn.checked = false;
+	}
+}
+
 function deleteBook(event) {
-	event.preventDefault();
-	const idx = event.target.dataset["idx"];
-	myLibrary.splice(idx, 1);
-	updateLibrary();
+  event.preventDefault();
+  const idx = event.target.dataset["idx"];
+  myLibrary.splice(idx, 1);
+  updateLibrary();
 }
 
 function hideModal(event) {
   event.preventDefault();
+  resetForm();
   modal.style.display = "none";
 }
 cancelNewBookBtn.addEventListener("click", hideModal);
