@@ -1,92 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="app.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="modal">
-        <form action="#" id="add-book-form">
-          <button id="close-modal-btn"></button>
-          <p>Modal content goes here...</p>
-        </form>
-    </div>    
+      <form action="#" id="add-book-form">
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author" />
+
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" />
+
+        <label for="page-count">Page count</label>
+        <input
+          type="number"
+          id="page-count"
+          name="page-count"
+          min="1"
+          step="1"
+        />
+
+        <div class="radio-container">
+          <label for="read-status-true">Read</label>
+          <input type="radio" id="read-status-true" name="read-status" value="true">
+          <label for="read-status-true">Not read</label>
+          <input type="radio" id="read-status-false" name="read-status" value="false">
+        </div>
+
+        <button id="submit-book-btn" class="btn btn-green" type="submit">Submit</button>
+      </form>
+    </div>
     <header>
-        <h1>My Library</h1>
+      <h1>My Library</h1>
     </header>
     <div id="content">
-        <button id="add-btn" class="btn btn-green">Add Book</button>
-        <div id="library-grid">
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-            <div class="bookCard">
-                <h2>Book Title</h2>
-                <hr>
-                <h3>Author</h3>
-                <hr>
-                <p>Page count</p>
-            </div>
-        </div>
+      <button id="add-btn" class="btn btn-green">Add Book</button>
+      <div id="library-grid"></div>
     </div>
-
-    
-</body>
+  </body>
 </html>
