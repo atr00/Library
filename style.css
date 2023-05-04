@@ -67,7 +67,7 @@ header {
 }
 
 .btn-green:hover {
-  box-shadow: 3px 3px 3px var(--green-color);
+  box-shadow: 0px 0px 4px 3px var(--green-color);
 }
 
 .btn-red {
@@ -75,7 +75,7 @@ header {
 }
 
 .btn-red:hover {
-  box-shadow: 3px 3px 3px var(--rust-color);
+  box-shadow: 0px 0px 4px 3px var(--rust-color);
 }
 
 #content {
