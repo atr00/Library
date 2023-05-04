@@ -16,6 +16,10 @@
   --horizontal-padding: 24px;
   --vertical-padding: 12px;
   --border-radius: 4px;
+  --rust-lvl-1: rgba(194, 77, 44, 0.2);
+  --rust-lvl-2: rgba(194, 77, 44, 0.1);
+  --rust-lvl-3: rgba(194, 77, 44, 0.05);
+  --rust-lvl-4: rgba(194, 77, 44, 0.025);
   background-color: var(--grey-color);
 }
 
@@ -149,4 +153,29 @@ form > label {
 
 form > button {
   margin-top: 16px;
+}
+
+#read-status-true:checked {
+  accent-color: var(--green-color);
+}
+
+#read-status-false:checked {
+  accent-color: var(--rust-color);
+}
+
+.del-btn {
+  background-color: var(--rust-color);
+  color: var(--blue-grey-color);
+  height: 36px;
+  width: 36px;
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+.del-btn:hover {
+  box-shadow:
+  0 0 0 2px var(--rust-lvl-1),
+  0 0 0 4px var(--rust-lvl-2),
+  0 0 0 6px var(--rust-lvl-3),
+  0 0 0 8px var(--rust-lvl-4);
 }

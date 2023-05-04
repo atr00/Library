@@ -12,10 +12,10 @@
     <div class="modal">
       <form action="#" id="add-book-form">
         <label for="author">Author</label>
-        <input type="text" id="author" name="author" required/>
+        <input type="text" id="author" name="author"/>
 
         <label for="title">Title</label>
-        <input type="text" id="title" name="title" required/>
+        <input type="text" id="title" name="title"/>
 
         <label for="page-count">Page count</label>
         <input
@@ -24,14 +24,13 @@
           name="page-count"
           min="1"
           step="1"
-          required
         />
 
         <div class="radio-container">
           <label for="read-status-true">Read</label>
-          <input type="radio" id="read-status-true" name="read-status" value="true" required>
+          <input type="radio" id="read-status-true" name="read-status" value="true">
           <label for="read-status-true">Not read</label>
-          <input type="radio" id="read-status-false" name="read-status" value="false" required>
+          <input type="radio" id="read-status-false" name="read-status" value="false">
         </div>
 
         <button id="submit-book-btn" class="btn btn-green" type="submit">Submit</button>
