@@ -6,7 +6,8 @@ const newBookAuthor = document.querySelector("#author");
 const newBookTitle = document.querySelector("#title");
 const newBookPageCount = document.querySelector("#page-count");
 const newBookReadStatus = document.querySelector("#read-status");
-const submitNewBookBtn = document.querySelector("submit-book-btn")
+const submitNewBookBtn = document.querySelector("#submit-book-btn")
+const cancelNewBookBtn = document.querySelector("#cancel-book-btn")
 
 let myLibrary = [];
 
@@ -37,6 +38,12 @@ function showModal() {
   modal.style.display = "flex";
 }
 addBtn.addEventListener("click", showModal);
+
+function hideModal(event) {
+	event.preventDefault();
+	modal.style.display = "none";
+}
+cancelNewBookBtn.addEventListener("click", hideModal);
 
 // When the user clicks anywhere outside of the modal form, close it
 window.onclick = function (event) {
@@ -117,5 +124,7 @@ function updateLibrary() {
     gridLibrary.appendChild(newDiv);
   }
 }
+
+
 
 updateLibrary();

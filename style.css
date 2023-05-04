@@ -66,6 +66,14 @@ header {
   box-shadow: 3px 3px 3px var(--green-color);
 }
 
+.btn-red {
+  color: var(--rust-color);
+}
+
+.btn-red:hover {
+  box-shadow: 3px 3px 3px var(--rust-color);
+}
+
 #content {
   padding: var(--vertical-padding) var(--horizontal-padding);
 }
