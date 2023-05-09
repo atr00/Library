@@ -34,6 +34,29 @@ function addBookToLibrary() {
   console.table(myLibrary);
 }
 
+class MyBook {
+  constructor(title, author, pageCount, readStatus) {
+    this.id = Date.now() + Math.random() * 100;
+    this.title = title;
+    this.author = author;
+    this.pageCount = pageCount;
+    this.read = readStatus;
+  }
+
+  info() {
+    const readStatus = this.read ? "read" : "not read yet";
+    return `${title} by ${author}, ${pageCount} pages, ${readStatus}.`;
+  };
+
+  toggleReadStatus() {
+    this.read === true ? (this.read = false) : (this.read = true);
+  }
+
+  addToLibrary(library) {
+    library.push(this);
+  }
+}
+
 // Show modal window
 function showModal() {
   modal.style.display = "flex";
@@ -63,12 +86,15 @@ function toggleReadStatus(event) {
 }
 
 // For testing
-let book1 = new Book("The Hobbit", "J.R.R. Tolkien", 295);
-myLibrary.push(book1);
-let book2 = new Book("The Hobbit", "J.R.R. Tolkien", 290);
-myLibrary.push(book2);
-let book3 = new Book("The Hobbit", "J.R.R. Tolkien", 298);
-myLibrary.push(book3);
+let book1 = new MyBook("The Hobbit", "J.R.R. Tolkien", 295, false);
+book1.addToLibrary(myLibrary);
+//myLibrary.push(book1);
+let book2 = new MyBook("The Hobbit", "J.R.R. Tolkien", 290, false);
+book2.addToLibrary(myLibrary);
+//myLibrary.push(book2);
+let book3 = new MyBook("The Hobbit", "J.R.R. Tolkien", 298, false);
+book3.addToLibrary(myLibrary);
+//myLibrary.push(book3);
 
 function updateLibrary() {
   gridLibrary.innerHTML = "";
@@ -204,13 +230,13 @@ function submitNewBook(event) {
   const titleValue = title.value;
   const pageCountValue = pageCount.value;
   const readStatusValue = Boolean(getReadStatusChoice(readStatusChoices));
-  const newBook = new Book(
+  const newBook = new MyBook(
     authorValue,
     titleValue,
     pageCountValue,
     readStatusValue
   );
-  myLibrary.push(newBook);
+  newBook.addToLibrary(myLibrary);
   updateLibrary();
   resetForm();
 
@@ -229,7 +255,8 @@ function resetForm() {
 
 function deleteBook(event) {
   event.preventDefault();
-  const idx = event.target.dataset["idx"];
+  const idx = parseInt(event.target.dataset["idx"]);
+  console.log(idx);
   myLibrary.splice(idx, 1);
   updateLibrary();
 }
